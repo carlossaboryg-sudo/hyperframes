@@ -1,4 +1,32 @@
 {
+  "permissions": {
+    "allow": [
+      "PowerShell($env:PATH = \"C:\\\\Users\\\\carli\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1-full_build\\\\bin;$env:PATH\"; Set-Location \"C:\\\\Temp\\\\lipglace-promo-render\"; ffprobe -version 2>&1 | Select-Object -First 1; Write-Output \"---rendering---\"; npx hyperframes render 2>&1 | Select-Object -Last 30)",
+      "Read(///wsl.localhost/Ubuntu/home/carli/hyperframes/**)",
+      "Read(///wsl.localhost/Ubuntu/home/carli/lumieredunord/lumieredunord-web/public/**)",
+      "Read(///wsl.localhost/Ubuntu/home/carli/lumieredunord/lumieredunord-web/**)",
+      "Read(///wsl.localhost/Ubuntu/home/carli/lumieredunord/lumieredunord-web/public/images/**)",
+      "Read(///wsl.localhost/Ubuntu/home/carli/lumieredunord/lumieredunord-web/public/images/products/**)",
+      "Read(///wsl.localhost/Ubuntu/home/carli/lumieredunord/lumieredunord-web/src/**)",
+      "Read(///wsl.localhost/Ubuntu/home/carli/lumieredunord/lumieredunord-web/src/lib/**)",
+      "Bash(awk -F'\"' '{print $2, \"|\", $4, \"|\", $14}')",
+      "Bash(awk -F'\",\"' '{print $2}')",
+      "PowerShell($candidates = @\\(\"C:\\\\Users\\\\carli\\\\Downloads\",\"C:\\\\Users\\\\carli\\\\Desktop\",\"C:\\\\Users\\\\carli\\\\Documents\",\"C:\\\\Users\\\\carli\\\\Videos\",\"C:\\\\Users\\\\carli\\\\Pictures\",\"C:\\\\Users\\\\carli\\\\OneDrive\\\\Documents\",\"C:\\\\Users\\\\carli\\\\OneDrive\\\\Desktop\",\"C:\\\\Users\\\\carli\\\\OneDrive\\\\Pictures\"\\); foreach\\($p in $candidates\\){ if\\(Test-Path $p\\){ Get-ChildItem -Path $p -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'lluvia|rojo|libstick|lipstick' } | Select-Object FullName } })",
+      "Read(///wsl.localhost/Ubuntu/home/**)",
+      "Read(///wsl.localhost/Ubuntu/home/carli/**)",
+      "PowerShell($paths = @\\(\"C:\\\\Users\\\\carli\\\\Downloads\",\"C:\\\\Users\\\\carli\\\\Desktop\",\"C:\\\\Users\\\\carli\\\\Documents\",\"C:\\\\Users\\\\carli\\\\Videos\",\"C:\\\\Users\\\\carli\\\\Pictures\",\"C:\\\\Users\\\\carli\\\\OneDrive\\\\Documents\",\"C:\\\\Users\\\\carli\\\\OneDrive\\\\Desktop\",\"C:\\\\Users\\\\carli\\\\OneDrive\\\\Pictures\",\"C:\\\\Users\\\\carli\\\\OneDrive\"\\); foreach\\($p in $paths\\){ if\\(Test-Path $p\\){ Get-ChildItem -Path $p -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'lluvia|rojo|libstick|lipstick|video' } | ForEach-Object { Write-Output $_.FullName } } })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\carli\\\\Downloads\\\\lluvia roja\" -Recurse -ErrorAction SilentlyContinue | Select-Object Name, @{n='SizeMB';e={if\\(-not $_.PSIsContainer\\){[math]::Round\\($_.Length/1MB,2\\)}}}, Extension, FullName)",
+      "Read(//c/Users/carli/Downloads/lluvia roja/**)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\carli\\\\Downloads\\\\lluvia roja\\\\\" -ErrorAction SilentlyContinue | Select-Object Name, @{n='SizeMB';e={[math]::Round\\($_.Length/1MB,2\\)}}; Write-Output \"---probe video---\"; $env:PATH = \"C:\\\\Users\\\\carli\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1-full_build\\\\bin;$env:PATH\"; ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate,duration,codec_name -of default=noprint_wrappers=1 \"C:\\\\Users\\\\carli\\\\Downloads\\\\lluvia roja\\\\lluvia roja.mp4\" 2>&1; Write-Output \"---probe audio---\"; ffprobe -v error -show_entries format=duration,bit_rate -show_entries stream=codec_name,sample_rate,channels -of default=noprint_wrappers=1 \"C:\\\\Users\\\\carli\\\\Downloads\\\\lluvia roja\\\\lluvia roja.MP3\" 2>&1)",
+      "PowerShell($env:PATH = \"C:\\\\Users\\\\carli\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1-full_build\\\\bin;$env:PATH\"; New-Item -Path \"C:\\\\Temp\\\\lluvia-frames\" -ItemType Directory -Force | Out-Null; $src = \"C:\\\\Users\\\\carli\\\\Downloads\\\\lluvia roja\\\\lluvia roja.mp4\"; @\\(0,3,6,9,12,15,18,21,24,26\\) | ForEach-Object { $t = $_; $out = \"C:\\\\Temp\\\\lluvia-frames\\\\frame_$\\('{0:D2}' -f $t\\)s.jpg\"; ffmpeg -y -ss $t -i $src -frames:v 1 -q:v 4 -vf \"scale=540:-1\" $out 2>&1 | Out-Null; Write-Output \"$t s -> $out\" }; Get-ChildItem \"C:\\\\Temp\\\\lluvia-frames\" | Select-Object Name, @{n='KB';e={[math]::Round\\($_.Length/1KB,1\\)}})",
+      "Read(//c/Temp/lluvia-frames/**)",
+      "Bash(mkdir -p \"\\\\\\\\\\\\\\\\wsl.localhost\\\\\\\\Ubuntu\\\\\\\\home\\\\\\\\carli\\\\\\\\hyperframes\\\\\\\\lluvia-roja-promo\\\\\\\\assets\")",
+      "Read(///wsl.localhost/Ubuntu/home/carli/hyperframes/lluvia-roja-promo/**)",
+      "PowerShell($env:PATH = \"C:\\\\Users\\\\carli\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1-full_build\\\\bin;$env:PATH\"; Set-Location \"C:\\\\Temp\\\\lluvia-roja-render\"; npx hyperframes render 2>&1 | Select-Object -Last 60)",
+      "Bash(ls \"C:\\\\\\\\Temp\\\\\\\\lluvia-frames\\\\\\\\\")",
+      "PowerShell($env:PATH = \"C:\\\\Users\\\\carli\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1-full_build\\\\bin;$env:PATH\"; $src = \"C:\\\\Users\\\\carli\\\\Downloads\\\\lluvia roja\\\\lluvia roja.mp4\"; @\\(20.5, 21.0, 21.4, 21.8, 22.2, 22.6, 23.0, 23.4\\) | ForEach-Object { $t = $_; $out = \"C:\\\\Temp\\\\lluvia-frames\\\\src_$\\('{0:N1}' -f $t\\).jpg\"; ffmpeg -y -ss $t -i $src -frames:v 1 -q:v 4 -vf \"scale=540:-1\" $out 2>&1 | Out-Null; Write-Output \"$t -> done\" })"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -6,9 +34,9 @@
         "hooks": [
           {
             "type": "command",
+            "command": "node -e \"\nconst chunks = [];\nprocess.stdin.on('data', d => chunks.push(d));\nprocess.stdin.on('end', () => {\n  const input = JSON.parse(Buffer.concat(chunks).toString());\n  const cmd = input.tool_input?.command || '';\n  if (!/git\\\\s+commit\\\\b/.test(cmd)) process.exit(0);\n  const { execSync } = require('child_process');\n  const cwd = execSync('git rev-parse --show-toplevel', { encoding: 'utf8' }).trim();\n  const steps = [\n    ['bun run build', 'Build'],\n    ['bun run lint', 'Lint'],\n    ['bun run --filter \\'*\\' typecheck 2>&1 | grep -v \\'vitest\\\\|test\\\\.ts\\' || true', 'Typecheck'],\n  ];\n  const failures = [];\n  for (const [script, label] of steps) {\n    try { execSync(script, { cwd, stdio: 'pipe' }); }\n    catch (e) {\n      failures.push(label + ':\\\\n' + (e.stdout?.toString() || e.message).slice(0, 400));\n    }\n  }\n  if (failures.length > 0) {\n    process.stdout.write(JSON.stringify({\n      continue: false,\n      stopReason: '\\u274c Pre-commit checks failed:\\\\n\\\\n' + failures.join('\\\\n\\\\n') + '\\\\n\\\\nFix the issues above before committing.',\n    }));\n  }\n});\"",
             "timeout": 180,
-            "statusMessage": "Running build + lint + typecheck before commit…",
-            "command": "node -e \"\nconst chunks = [];\nprocess.stdin.on('data', d => chunks.push(d));\nprocess.stdin.on('end', () => {\n  const input = JSON.parse(Buffer.concat(chunks).toString());\n  const cmd = input.tool_input?.command || '';\n  if (!/git\\\\s+commit\\\\b/.test(cmd)) process.exit(0);\n  const { execSync } = require('child_process');\n  const cwd = execSync('git rev-parse --show-toplevel', { encoding: 'utf8' }).trim();\n  const steps = [\n    ['bun run build', 'Build'],\n    ['bun run lint', 'Lint'],\n    ['bun run --filter \\'*\\' typecheck 2>&1 | grep -v \\'vitest\\\\|test\\\\.ts\\' || true', 'Typecheck'],\n  ];\n  const failures = [];\n  for (const [script, label] of steps) {\n    try { execSync(script, { cwd, stdio: 'pipe' }); }\n    catch (e) {\n      failures.push(label + ':\\\\n' + (e.stdout?.toString() || e.message).slice(0, 400));\n    }\n  }\n  if (failures.length > 0) {\n    process.stdout.write(JSON.stringify({\n      continue: false,\n      stopReason: '\\u274c Pre-commit checks failed:\\\\n\\\\n' + failures.join('\\\\n\\\\n') + '\\\\n\\\\nFix the issues above before committing.',\n    }));\n  }\n});\""
+            "statusMessage": "Running build + lint + typecheck before commit…"
           }
         ]
       }

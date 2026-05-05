@@ -2,6 +2,22 @@
 
 Open-source video rendering framework: write HTML, render video.
 
+## OpenCode Commands
+
+Use these slash commands to speed up HyperFrames workflows:
+
+| Command | Action |
+|---------|--------|
+| `/lint-hf [dir]` | Lint composition structure |
+| `/validate-hf [dir]` | Validate in headless Chrome |
+| `/render-draft [dir]` | Fast draft render (iteration) |
+| `/render-final [dir]` | High-quality render (runs lint+validate first) |
+| `/doctor` | Check environment health |
+
+## MCP Tools
+
+- **context7** — Search live docs for GSAP, FFmpeg, Puppeteer, etc. Use when you need API references.
+
 ## Skills
 
 This repo ships AI agent skills via [vercel-labs/skills](https://github.com/vercel-labs/skills). Install them before writing compositions — they encode framework-specific patterns that generic docs don't cover.

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "model": "opencode/deepseek-v4-pro",
+
+  "provider": {
+    "opencode": {
+      "models": {
+        "deepseek-v4-pro": {
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "textVerbosity": "low"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "textVerbosity": "low"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "instructions": [
+    "AGENTS.md",
+    "DESIGN.md",
+    ".claude/skills/**/SKILL.md",
+    ".agents/skills/**/SKILL.md"
+  ],
+
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    }
+  },
+
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "reserved": 12000
+  },
+
+  "permission": {
+    "edit": "allow",
+    "bash": {
+      "*": "allow",
+      "git push *": "ask",
+      "rm -rf *": "ask",
+      "npm publish *": "ask",
+      "docker push *": "ask"
+    },
+    "webfetch": "allow"
+  },
+
+  "formatter": {
+    "oxfmt": {
+      "command": ["bunx", "oxfmt", "$FILE"],
+      "extensions": [".ts", ".tsx", ".js", ".jsx", ".json", ".md"]
+    }
+  },
+
+  "shell": "powershell",
+
+  "watcher": {
+    "ignore": ["node_modules/**", "dist/**", ".git/**", "renders/**", "**/*.mp4", "**/*.webm"]
+  },
+
+  "snapshot": true,
+
+  "autoupdate": true,
+
+  "share": "manual"
+}
