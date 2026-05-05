@@ -4,6 +4,7 @@ import { mkdirSync, readFileSync, statSync, writeFileSync, rmSync } from "node:f
 
 export const examples: Example[] = [
   ["Render to MP4", "hyperframes render --output output.mp4"],
+  ["Render a specific composition", "hyperframes render -c compositions/intro.html -o intro.mp4"],
   ["Render transparent overlay (ProRes)", "hyperframes render --format mov --output overlay.mov"],
   ["Render transparent WebM overlay", "hyperframes render --format webm --output overlay.webm"],
   ["High quality at 60fps", "hyperframes render --fps 60 --quality high --output hd.mp4"],
@@ -61,6 +62,12 @@ export default defineCommand({
       type: "positional",
       description: "Project directory",
       required: false,
+    },
+    composition: {
+      type: "string",
+      alias: "c",
+      description:
+        "Render a specific composition file instead of index.html (e.g. compositions/intro.html)",
     },
     output: {
       type: "string",
@@ -263,16 +270,30 @@ export default defineCommand({
       process.exit(1);
     }
 
+    // ── Validate composition entry file ──────────────────────────────────
+    const entryFile = args.composition?.trim() || undefined;
+    if (entryFile) {
+      const entryPath = resolve(project.dir, entryFile);
+      try {
+        statSync(entryPath);
+      } catch {
+        errorBox(
+          "Composition not found",
+          `"${entryFile}" does not exist in the project directory.`,
+          "Use 'hyperframes compositions' to list available compositions.",
+        );
+        process.exit(1);
+      }
+    }
+
     // ── Print render plan ─────────────────────────────────────────────────
     if (!quiet) {
       const workerLabel =
         workers != null ? `${workers} workers` : `auto workers (${CPU_CORE_COUNT} cores detected)`;
       console.log("");
+      const nameLabel = entryFile ? project.name + "/" + entryFile : project.name;
       console.log(
-        c.accent("\u25C6") +
-          "  Rendering " +
-          c.accent(project.name) +
-          c.dim(" \u2192 " + outputPath),
+        c.accent("\u25C6") + "  Rendering " + c.accent(nameLabel) + c.dim(" \u2192 " + outputPath),
       );
       console.log(c.dim("   " + fps + "fps \u00B7 " + quality + " \u00B7 " + workerLabel));
       if (useGpu || useBrowserGpu) {
@@ -403,6 +424,7 @@ export default defineCommand({
         videoBitrate,
         quiet,
         variables,
+        entryFile,
         exitAfterComplete: true,
       });
     } else {
@@ -419,6 +441,7 @@ export default defineCommand({
         quiet,
         browserPath,
         variables,
+        entryFile,
         exitAfterComplete: true,
       });
     }
@@ -438,6 +461,7 @@ interface RenderOptions {
   quiet: boolean;
   browserPath?: string;
   variables?: Record<string, unknown>;
+  entryFile?: string;
   exitAfterComplete?: boolean;
 }
 
@@ -713,6 +737,7 @@ async function renderDocker(
       videoBitrate: options.videoBitrate,
       quiet: options.quiet,
       variables: options.variables,
+      entryFile: options.entryFile,
     },
   });
 
@@ -783,6 +808,7 @@ export async function renderLocal(
     crf: options.crf,
     videoBitrate: options.videoBitrate,
     variables: options.variables,
+    entryFile: options.entryFile,
   });
 
   const onProgress = options.quiet

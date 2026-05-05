@@ -210,4 +210,19 @@ describe("buildDockerRunArgs", () => {
     });
     expect(args).not.toContain("--variables");
   });
+
+  it("forwards --composition to the container when entryFile is set", () => {
+    const args = buildDockerRunArgs({
+      ...FIXED_INPUT,
+      options: { ...BASE, entryFile: "compositions/intro.html" },
+    });
+    const idx = args.indexOf("--composition");
+    expect(idx).toBeGreaterThan(-1);
+    expect(args[idx + 1]).toBe("compositions/intro.html");
+  });
+
+  it("omits --composition when entryFile is not set", () => {
+    const args = buildDockerRunArgs({ ...FIXED_INPUT, options: BASE });
+    expect(args).not.toContain("--composition");
+  });
 });
