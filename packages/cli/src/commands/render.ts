@@ -67,7 +67,8 @@ export default defineCommand({
       type: "string",
       alias: "c",
       description:
-        "Render a specific composition file instead of index.html (e.g. compositions/intro.html)",
+        "Render a specific composition file instead of index.html (e.g. compositions/intro.html). " +
+        "Sub-compositions using <template> wrappers must be referenced from index.html via data-composition-src.",
     },
     output: {
       type: "string",
@@ -271,16 +272,24 @@ export default defineCommand({
     }
 
     // ── Validate composition entry file ──────────────────────────────────
-    const entryFile = args.composition?.trim() || undefined;
+    const entryFile = args.composition?.trim().replace(/^\.\//, "") || undefined;
     if (entryFile) {
-      const entryPath = resolve(project.dir, entryFile);
+      const absProjectDir = resolve(project.dir);
+      const entryPath = resolve(absProjectDir, entryFile);
+      if (!entryPath.startsWith(absProjectDir)) {
+        errorBox(
+          "Invalid composition path",
+          `Entry file must stay inside the project directory: ${entryFile}`,
+        );
+        process.exit(1);
+      }
       try {
         statSync(entryPath);
       } catch {
         errorBox(
           "Composition not found",
           `"${entryFile}" does not exist in the project directory.`,
-          "Use 'hyperframes compositions' to list available compositions.",
+          "Pass a path to a .html file relative to the project root (e.g. compositions/intro.html).",
         );
         process.exit(1);
       }

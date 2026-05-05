@@ -161,6 +161,7 @@ describe("buildDockerRunArgs", () => {
         crf: 16,
         videoBitrate: undefined,
         quiet: true,
+        entryFile: "compositions/intro.html",
       },
     });
     // Each value must reach the container exactly once. If a future option
@@ -176,6 +177,8 @@ describe("buildDockerRunArgs", () => {
     expect(args).toContain("--gpu");
     expect(args).toContain("--no-browser-gpu");
     expect(args).toContain("--hdr");
+    expect(args).toContain("--composition");
+    expect(args).toContain("compositions/intro.html");
   });
 
   it("forwards --video-bitrate to the container when set", () => {
